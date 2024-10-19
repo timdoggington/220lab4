@@ -1,0 +1,3 @@
+/Users/alexchambers/CLionProjects/220lab4/cmake-build-debug/CMakeFiles/220lab4.dir
+/Users/alexchambers/CLionProjects/220lab4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/alexchambers/CLionProjects/220lab4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
