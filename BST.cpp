@@ -18,14 +18,52 @@ BST::BST(string n, string st, string descr, bool Xtra) {
 bool BST::insert(string n, string st, string descr) {
 	BSTNode *newest = new BSTNode(n, st, descr);
 	BSTNode *last = root;
-	while (root->right != NULL) {
-		last = last->right;
+	if (root = NULL) {
+		root = newest;
+	} else {
+		while (last->right != NULL && last->left != NULL) {
+			if (newest->left == NULL && newest->animal->name < last->animal->name) {
+				break;
+			} else if (newest->right == NULL && newest->animal->name > last->animal->name) {
+				break;
+			}
+			if (last->animal->name < newest->animal->name) {
+				last = last->left;
+			} else if (last->animal->name > newest->animal->name) {
+				last = last->right;
+			}
+		}
 	}
-	last->right = newest;
+	if (newest->animal->name < last->animal->name) {
+		last->left = newest;
+		newest->parent = last;
+	} else if (newest->animal->name > last->animal->name) {
+		last->right = newest;
+		newest->parent = last;
+	}
 // you write
 }
 
 BSTNode *BST::find(string n) {
+	BSTNode *last = root;
+	if (root == NULL) {
+		return NULL;
+	} else {
+		while (last->right != NULL && last->left != NULL) {
+			if (n == last->animal->name) {
+				break;
+			} else if (n < last->animal->name && last->left == NULL) {
+				return NULL;
+			} else if (n > last->animal->name && last->right == NULL) {
+				return NULL;
+			} else if (n < last->animal->name) {
+				last = last->left;
+			} else if (n > last->animal->name) {
+				last = last->right;
+			}
+		}
+	}
+	return last;
 //you write
 }
 
@@ -82,8 +120,7 @@ void BST::clearTree() {
 void BST::clearTree(BSTNode *tmp) {
 	if (tmp == NULL) {
 		return;
-	}
-	else {
+	} else {
 		clearTree(tmp->left);
 		clearTree(tmp->right);
 		tmp->printNode(Xt);
