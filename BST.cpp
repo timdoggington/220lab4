@@ -69,21 +69,43 @@ BSTNode *BST::find(string n) {
 
 void BST::updateStatus(string name, string st) {
 // you write
-
 }
+
 void BST::printTreeIO(BSTNode *tmp) {
 // you write
+	if (tmp == NULL) {
+		return;
+	} else {
+		printTreeIO(tmp->left);
+		tmp->printNode(false);
+		printTreeIO(tmp->right);
+	}
 }
+
 
 void BST::printTreePre(BSTNode *tmp) {
 // you write
+	if (tmp == NULL) {
+		return;
+	} else {
+		tmp->printNode(false);
+		printTreePre(tmp->left);
+		printTreePre(tmp->right);
+	}
 }
+
 
 
 void BST::printTreePost(BSTNode *tmp) {
-// you write
+//you write
+	if (tmp == NULL) {
+		return;
+	} else {
+		printTreePre(tmp->left);
+		printTreePre(tmp->right);
+		tmp->printNode(false);
+	}
 }
-
 void BST::setHeight(BSTNode *tmp) {
 // you write
 }
