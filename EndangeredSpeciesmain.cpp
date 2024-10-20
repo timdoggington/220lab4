@@ -1,6 +1,3 @@
-//
-// Created by Alex Chambers on 10/16/24.
-//
 #include "BST.hpp"
 #include "Interface.hpp"
 #include <iostream>
@@ -10,12 +7,16 @@ void readInTree(BST *tree);
 
 int main() {
 
-//	Interface interface("PracticeSpecies.txt", false);
-//	interface.Menu();
+Interface interface("PracticeSpecies.txt", false);
+interface.Menu();
 
+	BST *tree = new BST(false);
+	readInTree(tree);
+	tree->printTreePre();
+	tree->printTreeIO();
+	tree->printTreePost();
 
-
-//	interface.tree->clearTree();
+//interface.tree->clearTree();
 
 //	Interface interface("EndangeredSpecies.txt", false);
 //	interface.Menu();
