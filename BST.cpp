@@ -18,7 +18,7 @@ BST::BST(string n, string st, string descr, bool Xtra) {
 bool BST::insert(string n, string st, string descr) {
 	BSTNode *newest = new BSTNode(n, st, descr);
 	BSTNode *last = root;
-	if (root = NULL) {
+	if (root == NULL) {
 		root = newest;
 	} else {
 		while (last->right != NULL && last->left != NULL) {
@@ -34,13 +34,16 @@ bool BST::insert(string n, string st, string descr) {
 			}
 		}
 	}
-	if (newest->animal->name < last->animal->name) {
-		last->left = newest;
-		newest->parent = last;
-	} else if (newest->animal->name > last->animal->name) {
-		last->right = newest;
-		newest->parent = last;
+	if (last != NULL) {
+		if (newest->animal->name < last->animal->name) {
+			last->left = newest;
+			newest->parent = last;
+		} else if (newest->animal->name > last->animal->name) {
+			last->right = newest;
+			newest->parent = last;
+		}
 	}
+	return true;
 // you write
 }
 
@@ -178,9 +181,3 @@ void BST::printTreeIO() {
 		printTreeIO(root);
 	}
 }
-
-
-
-
-
-
