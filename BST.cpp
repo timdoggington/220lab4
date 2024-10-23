@@ -21,15 +21,16 @@ bool BST::insert(string n, string st, string descr) {
 	if (root == NULL) {
 		root = newest;
 	} else {
-		while (last->right != NULL && last->left != NULL) {
-			if (newest->left == NULL && newest->animal->name < last->animal->name) {
+		while (last->right != NULL || last->left != NULL) {
+			if (last->left == NULL && newest->animal->name < last->animal->name) {
 				break;
-			} else if (newest->right == NULL && newest->animal->name > last->animal->name) {
+			} else if (last->right == NULL && newest->animal->name > last->animal->name) {
 				break;
 			}
-			if (last->animal->name < newest->animal->name) {
+			if (last->animal->name > newest->animal->name) {
 				last = last->left;
-			} else if (last->animal->name > newest->animal->name) {
+
+			} else if (last->animal->name < newest->animal->name) {
 				last = last->right;
 			}
 		}
@@ -49,11 +50,13 @@ bool BST::insert(string n, string st, string descr) {
 
 BSTNode *BST::find(string n) {
 	BSTNode *last = root;
+	int found = 0;
 	if (root == NULL) {
 		return NULL;
 	} else {
-		while (last->right != NULL && last->left != NULL) {
+		while (last->right != NULL || last->left != NULL) {
 			if (n == last->animal->name) {
+				found = 1;
 				break;
 			} else if (n < last->animal->name && last->left == NULL) {
 				return NULL;
@@ -66,7 +69,15 @@ BSTNode *BST::find(string n) {
 			}
 		}
 	}
-	return last;
+	if (last->animal->name == n) {
+		found = 1;
+	}
+	if (found == 1) {
+		cout << "Found:" << last->animal->name << endl;
+		return last;
+	} else {
+		cout << n << ":Not found" << endl;
+	}
 //you write
 }
 
