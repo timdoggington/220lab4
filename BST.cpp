@@ -59,9 +59,9 @@ BSTNode *BST::find(string n) {
 				found = 1;
 				break;
 			} else if (n < last->animal->name && last->left == NULL) {
-				return NULL;
+				break;
 			} else if (n > last->animal->name && last->right == NULL) {
-				return NULL;
+				break;
 			} else if (n < last->animal->name) {
 				last = last->left;
 			} else if (n > last->animal->name) {
@@ -77,6 +77,7 @@ BSTNode *BST::find(string n) {
 		return last;
 	} else {
 		cout << n << ":Not found" << endl;
+		return NULL;
 	}
 //you write
 }
