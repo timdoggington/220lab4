@@ -35,6 +35,7 @@ bool BST::insert(string n, string st, string descr) {
 			}
 		}
 	}
+
 	if (last != NULL) {
 		if (newest->animal->name < last->animal->name) {
 			last->left = newest;
@@ -44,6 +45,7 @@ bool BST::insert(string n, string st, string descr) {
 			newest->parent = last;
 		}
 	}
+	setHeight(newest);
 	return true;
 // you write
 }
@@ -122,6 +124,14 @@ void BST::printTreePost(BSTNode *tmp) {
 	}
 }
 void BST::setHeight(BSTNode *tmp) {
+	int newheight = 2;
+	while (tmp->parent != NULL) {
+		if (newheight > tmp->parent->height) {
+			tmp->parent->height = newheight;
+		}
+		tmp = tmp->parent;
+		newheight+=1;
+	}
 // you write
 }
 
