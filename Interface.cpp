@@ -28,7 +28,8 @@ void Interface::Menu() {
 		case 'a': {
 			cout << "What species do you want to look up?"<<endl;
 			string l;
-			cin >> l;
+			cin.ignore();
+			getline(cin, l);
 			BSTNode *t = tree->find(l);
 			if (t == NULL) {
 				cout << l <<" not in endangered list.  " << endl;
@@ -63,7 +64,8 @@ void Interface::Menu() {
 		case 'c': {
 			cout << "Enter Species: "<<endl;
 			string l;
-			cin >> l;
+			cin.ignore();
+			getline(cin, l);
 			BSTNode *t = tree->remove(l);
 			if (t == NULL) {
 				cout << endl  << l << " not in tree " << endl;
@@ -77,7 +79,8 @@ void Interface::Menu() {
 		case 'd': {
 			cout << "Enter Species: "<<endl;
 			string l;
-			cin >> l;
+			cin.ignore();
+			getline(cin, l);
 			cout << "Enter Status (EX = Extinct\n EW = Extinct in the Wild\n T1 = Critically Threatened\n T2 = Threatened\n NT=Near Threatened\n Vulnerable = VU\n LC = Least Concern\n " << endl;
 			string status;
 			cin >> status;
@@ -136,7 +139,7 @@ void Interface::readFile() {
 	string j;
 	getline(file,j);
 	int x = 0;
-	while (!file.eof()&& x < 10) {
+	while (!file.eof()&& x < 17) {
 		strip(j, arr);
 		cout << arr[0]<< ", " << arr[1] << ", " << arr[2] << endl;
 		// for testing as I read in - you can comment this out you've gotten things working
