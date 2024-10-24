@@ -7,14 +7,19 @@ void readInTree(BST *tree);
 
 int main() {
 
-Interface interface("PracticeSpecies.txt", false);
-interface.Menu();
-
+	Interface interface("PracticeSpecies.txt", false);
 	BST *tree = new BST(false);
 	readInTree(tree);
-	tree->printTreePre();
-	tree->printTreeIO();
-	tree->printTreePost();
+	cout << endl << endl;
+
+
+
+	//tree->printTreePre();
+	//tree->printTreeIO();
+	// tree->printTreePost();
+	interface.Menu();
+
+
 
 //interface.tree->clearTree();
 
@@ -54,4 +59,3 @@ void readInTree(BST *tree){
 	}
 	cout << endl;
 }
-
