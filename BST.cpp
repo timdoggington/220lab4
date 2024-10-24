@@ -76,6 +76,7 @@ BSTNode *BST::find(string n) {
 	}
 	if (found == 1) {
 		cout << "Found:" << last->animal->name << endl;
+		cout << "Status: " << last->animal->status << endl;
 		return last;
 	} else {
 		cout << n << ":Not found" << endl;
@@ -86,6 +87,7 @@ BSTNode *BST::find(string n) {
 
 void BST::updateStatus(string name, string st) {
 // you write
+	find(name)->animal->status = st;
 }
 
 void BST::printTreeIO(BSTNode *tmp) {
