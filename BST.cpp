@@ -151,6 +151,7 @@ BSTNode *BST::removeNoKids(BSTNode *tmp) {
 			tmp->parent->right = NULL;
 		}
 	}
+	setHeight(tmp);
 	delete tmp;
 	return NULL;
 // you write
@@ -158,7 +159,7 @@ BSTNode *BST::removeNoKids(BSTNode *tmp) {
 
 BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
 	if (leftFlag) {
-		// left is null
+		// right is null
 		if (tmp->parent->animal->name > tmp->animal->name) {
 			tmp->right->parent = tmp->parent;
 			tmp->parent->left = tmp->right;
@@ -166,7 +167,7 @@ BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
 			tmp->right->parent = tmp->parent;
 			tmp->parent->right = tmp->right;
 		}
-	} else {
+	} else { // Left is null
 		if (tmp->parent->animal->name > tmp->animal->name) {
 			tmp->left->parent = tmp->parent;
 			tmp->parent->right = tmp->left;
@@ -175,6 +176,7 @@ BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
 			tmp->parent->left = tmp->left;
 		}
 	}
+	setHeight(tmp);
 	delete tmp;
 	return NULL;
 // you write
@@ -206,12 +208,13 @@ BSTNode *BST::remove(string s) {
 	if (found == 1) {
 	//last now equals the node to be removed
 		if (last->left == NULL && last-> right == NULL) {
-			removeNoKids(last);
+			removeNoKids(last); // No Kids
 		} else if (last->left != NULL && last->right == NULL) {
-			removeOneKid(last, false);
+			removeOneKid(last, false); // One Child on the right
 		} else if (last->left == NULL && last->right != NULL) {
-			removeOneKid(last, true);
+			removeOneKid(last, true); // One child on the left
 		} else {
+			//Case where there are two children
 			BSTNode *temp = last;
 			temp = last->right;
 			while (temp->left != NULL) {
@@ -224,6 +227,7 @@ BSTNode *BST::remove(string s) {
 			BSTNode *copy = temp->parent;
 			delete temp;
 			setHeight(copy);
+
 		}
 	}
 	return NULL;
