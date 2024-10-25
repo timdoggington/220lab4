@@ -126,13 +126,19 @@ void BST::printTreePost(BSTNode *tmp) {
 	}
 }
 void BST::setHeight(BSTNode *tmp) {
-	int newheight = 2;
-	while (tmp->parent != NULL) {
-		if (newheight > tmp->parent->height) {
-			tmp->parent->height = newheight;
+	while (tmp != NULL) {
+		if (tmp->right == NULL && tmp->left == NULL) {
+			tmp->height = 1;
+		} else if (tmp->right == NULL && tmp->left != NULL) {
+			tmp->height = tmp->left->height+1;
+		} else if (tmp->right != NULL && tmp->left == NULL) {
+			tmp->height = tmp->right->height+1;
+		} else if (tmp->right->height >= tmp->left->height) {
+			tmp->height = tmp->right->height+1;
+		} else {
+			tmp->height = tmp->left->height+1;
 		}
 		tmp = tmp->parent;
-		newheight+=1;
 	}
 // you write
 }
@@ -153,18 +159,28 @@ BSTNode *BST::removeNoKids(BSTNode *tmp) {
 BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
 	if (leftFlag) {
 		// left is null
-		tmp->right->parent = tmp->parent;
-		tmp->parent->right = tmp->right;
+		if (tmp->parent->animal->name > tmp->animal->name) {
+			tmp->right->parent = tmp->parent;
+			tmp->parent->left = tmp->right;
+		} else {
+			tmp->right->parent = tmp->parent;
+			tmp->parent->right = tmp->right;
+		}
 	} else {
-		tmp->left->parent = tmp->parent;
-		tmp->parent->left = tmp->left;
+		if (tmp->parent->animal->name > tmp->animal->name) {
+			tmp->left->parent = tmp->parent;
+			tmp->parent->right = tmp->left;
+		} else {
+			tmp->left->parent = tmp->parent;
+			tmp->parent->left = tmp->left;
+		}
 	}
-	//delete tmp;
+	delete tmp;
+	return NULL;
 // you write
 }
 BSTNode *BST::remove(string s) {
 	BSTNode *last = root;
-	//cout << last << endl;
 	int found = 0;
 	if (root == NULL) {
 		return NULL;
@@ -191,13 +207,10 @@ BSTNode *BST::remove(string s) {
 	//last now equals the node to be removed
 		if (last->left == NULL && last-> right == NULL) {
 			removeNoKids(last);
-			cout << "Would remove : " << last->animal->name << " with no kids" << endl;
 		} else if (last->left != NULL && last->right == NULL) {
-			//removeOneKid(last, true);
-			cout << "Would remove : " << last->animal->name << " with one kid" << endl;
+			removeOneKid(last, false);
 		} else if (last->left == NULL && last->right != NULL) {
-			//removeOneKid(last, false);
-			cout << "Would remove : " << last->animal->name << " with no two" << endl;
+			removeOneKid(last, true);
 		} else {
 			BSTNode *temp = last;
 			temp = last->right;
@@ -205,9 +218,15 @@ BSTNode *BST::remove(string s) {
 				temp = temp->left;
 			}
 			//temp now equals leftmost node from right child
+			last->animal->name = temp->animal->name;
+			last->animal->status = temp->animal->status;
+			last->animal->info = temp->animal->info;
+			BSTNode *copy = temp->parent;
+			delete temp;
+			setHeight(copy);
 		}
-		return NULL;
 	}
+	return NULL;
 // you write
 }
 
