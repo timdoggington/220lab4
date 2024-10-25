@@ -17,7 +17,7 @@ int main() {
 	//tree->printTreePre();
 	//tree->printTreeIO();
 	// tree->printTreePost();
-	interface.Menu();
+	//interface.Menu();
 
 
 
@@ -26,6 +26,35 @@ int main() {
 //	Interface interface("EndangeredSpecies.txt", false);
 //	interface.Menu();
 //	tree->clearTree();
+
+	cout << "************************************************************"<<endl;
+	cout << "Testing Update Status"<<endl;
+	BSTNode *tmp = tree->find("Black-footed Ferrets");
+	cout << endl;
+	tmp->printNode(true);
+	cout <<  endl;
+	tree->updateStatus("Black-footed Ferrets", "T1");
+	cout << endl << endl;
+	tmp = tree->find("Sea Turtle");
+	cout << endl;
+	tmp->printNode(true);
+	cout <<  endl;
+	tree->updateStatus("Sea Turtle", "NT");
+	cout << endl << endl;
+
+
+	cout << "********************************************************"<<endl;
+	cout << "Removing, node with no kids:"<<endl;
+	tree->printTreeIO();
+	cout << endl;
+	tree->remove("Amur Leopard");
+	tree->find("Amur Leopard");
+	tree->printTreeIO();
+
+
+
+
+	interface.Menu();
 
 	return 0;
 }
