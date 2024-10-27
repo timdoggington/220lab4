@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
-
+// Made By Alexander Chambers and TJ Tomaszewski
 /**************************************************************/
 /* These are the methods you are to write for a BST           */
 /* More Detailed Instructions can be found in the doc and in  */
@@ -157,7 +157,13 @@ BSTNode *BST::removeNoKids(BSTNode *tmp) {
 }
 
 BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
-	if (leftFlag) {
+	if (tmp->parent == NULL && leftFlag) {
+		root = tmp->right;
+		tmp->right->parent = NULL;
+	} else if (tmp->parent == NULL) {
+		root = tmp->left;
+		tmp->left->parent = NULL;
+	} else if (leftFlag) {
 		// left is null
 		if (tmp->parent->animal->name > tmp->animal->name) {
 			tmp->right->parent = tmp->parent;
@@ -167,7 +173,7 @@ BSTNode *BST::removeOneKid(BSTNode *tmp,bool leftFlag) {
 			tmp->parent->right = tmp->right;
 		}
 	} else {
-		if (tmp->parent->animal->name > tmp->animal->name) {
+		if (tmp->parent->animal->name > tmp->animal->name) { //SegFault Here
 			tmp->left->parent = tmp->parent;
 			tmp->parent->right = tmp->left;
 		} else {
@@ -185,6 +191,7 @@ BSTNode *BST::remove(string s) {
 	string deleted_name;
 	int deleted_height;
 	if (root == NULL) {
+		cout << "Root Null! Nothing to delete!";
 		return NULL;
 	} else {
 		while (last->right != NULL || last->left != NULL) {
