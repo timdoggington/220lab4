@@ -239,8 +239,9 @@ BSTNode *BST::remove(string s) {
 			}
 			setHeight(last);
 		}
+		return last;
 	}
-	return last;
+	return NULL;
 // you write
 }
 
